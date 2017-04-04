@@ -1,0 +1,72 @@
+<!-- Panel Menu - Opciones -->
+
+
+<div class="titulo-menu">
+    <a href="#">OPCIONES</a>
+</div>
+
+<div id="contenedor-menu-opciones" class="item-acordeon">
+    <div id="contenido-menu-opciones" class="contenido-menu">
+        <i id="chincheta-opciones" class="glyphicon glyphicon-pushpin chincheta"></i>
+            		
+        <div class="panel-menu">
+
+            <h4>Resumen</h4>
+
+            <span ng-bind="pupu">a</span>
+
+            <div id="radios"> 
+
+                <label for="metodoL" class="metodo" data-toggle="tooltip" title="Base line, extracting the n first sentences of the document." data-placement="bottom">
+                </label>
+                <input type="radio" id="metodoL" name="metodo" ng-model="$parent.metodo" ng-value="'l'" ng-change="habilitaProcesamiento()" />
+
+                <label for="metodoN" class="metodo" data-toggle="tooltip" title="Using only topic identification (word frecuency)." data-placement="bottom">
+                </label>
+                <input type="radio" id="metodoN" name="metodo" ng-model="$parent.metodo" ng-value="'n'" ng-change="habilitaProcesamiento()" />
+
+                <label for="metodoE" class="metodo" data-toggle="tooltip" title="Redundancy detection and topic identification (textual entailment + word frequency)." data-placement="bottom">
+                </label>
+                <input type="radio" id="metodoE" name="metodo" ng-model="$parent.metodo" ng-value="'e'" ng-change="habilitaProcesamiento()" />
+
+                <label for="metodoA" class="metodo" data-toggle="tooltip" title="Redundancy detection, topic identification and relevance detection (textual entailment + word frequency + code quantity principle)." data-placement="bottom">
+                </label>
+                <input type="radio" id="metodoA" name="metodo" ng-model="$parent.metodo" ng-value="'a'" ng-change="habilitaProcesamiento()" />
+
+                <label for="metodoI" class="metodo" data-toggle="tooltip" title="Topic identification and relevance detection (word frequency + code quantity principle)." data-placement="bottom">
+                </label>
+                <input type="radio" id="metodoI" name="metodo" ng-model="$parent.metodo" ng-value="'i'" ng-change="habilitaProcesamiento()" />
+
+                <label for="metodoR" class="metodo" data-toggle="tooltip" title="Relevance detection (code quantity principle)" data-placement="bottom">
+                </label>
+                <input type="radio" id="metodoR" name="metodo" ng-model="$parent.metodo" ng-value="'r'" ng-change="habilitaProcesamiento()" />
+                
+                <span id="slider"></span>
+            </div>
+
+    
+            <div class="slider">
+                <input type="range">
+            </div>
+
+            <div class="slider">
+                <input type="range">
+            </div>
+
+            <div class="slider">
+                <input type="range">
+            </div>
+            <!--
+            <div class='toggle' id='switch'>
+                <div class='toggle-text-off'>OFF</div>
+                <div class='glow-comp'></div>
+                <div class='toggle-button'></div>
+                <div class='toggle-text-on'>ON</div>
+            </div>
+
+            -->
+
+        </div>
+
+    </div>
+</div>

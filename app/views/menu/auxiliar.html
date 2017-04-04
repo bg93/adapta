@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" ng-app="calculadora">
+<head>
+  <meta charset="utf-8">
+  <title>Practica2</title>
+  <link rel="stylesheet" href="css/app.css"/>  
+</head>
+<body ng-controller="practica2Ctrl">
+	
+	<div class="filtro">
+		<span class="buscarLibros">Buscar:</span> 
+		<input ng-model="libroBuscado" class="filtroLibros">
+	</div> 
+
+	 <table class="tablaLibros">
+	 	<tr>
+	 		<th>Titulo</th>
+	 		<th>Autor</th>
+	 	</tr>
+		<tr ng-repeat="libro in libros | filter:libroBuscado">
+			<td>{{libro.titulo}}</td>
+			<td>{{libro.autor}}</td>
+		</tr>
+	</table>
+
+	<!-- Angular  -->
+	<script src="lib/angular.js"></script>
+	  
+	<!-- Archivos adicionales -->
+	<script src="js/app.js"></script>  
+	<script src="js/services/services.js"></script>  
+	<script src="js/controllers/controllers.js"></script>
+
+</body>
+</html>
