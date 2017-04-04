@@ -1,0 +1,130 @@
+
+.lista-compartir {
+  /*
+  position: relative;
+  width: 470px;
+  margin: auto;
+  */
+}
+
+ul.iconos-compartir { 
+  list-style: none;
+  padding-top: 40px;
+  padding-bottom: 70px;
+  /*float: left;*/
+}
+
+ul.iconos-compartir li {
+  position: relative;
+  /*
+  width: 80px; height: 40px;
+  */
+  width: 70px; height: 30px;
+  float: left;
+}
+
+ul.iconos-compartir li a {
+  position: absolute;
+  /*
+  width: 80px; height: 40px;
+  */
+  width: 70px; height: 30px;
+  display: block;
+  background: #33322f;
+  color: #fff;
+  text-align: center;
+  line-height: 50px;
+  text-decoration: none;
+}
+
+ul.iconos-compartir li a:after {
+  content: "";
+  position: absolute;
+  top: -35px;
+  left: 0;
+  border: 35px solid transparent;
+  border-top: 0;
+  border-bottom: 35px solid #33322f;
+}
+
+ul.iconos-compartir li a:before {
+  content: "";
+  position: absolute;
+  bottom: -35px;
+  left: 0;
+  border: 35px solid transparent;
+  border-top: 35px solid #33322f;
+  border-bottom: 0;
+}
+
+ul.iconos-compartir li a:hover {
+  background: #000;
+}
+
+ul.iconos-compartir li a:hover:after {
+  border-bottom: 35px solid #000;
+}
+
+ul.iconos-compartir li a:hover:before {
+  border-top: 35px solid #000;
+}
+
+ul.iconos-compartir li:first-child:before {
+  content: "";
+  position: absolute; 
+  top: 5px; 
+  left: -25px;
+  border: 20px solid transparent;
+  border-top: 0;
+  border-bottom: 20px solid #33322f;
+  transform: rotate(-90deg);
+}
+
+ul.iconos-compartir li:last-child:after {
+  content: "";
+  position: absolute; 
+  top: 5px; 
+  right: -25px;
+  border: 20px solid transparent;
+  border-top: 0;
+  border-bottom: 20px solid #33322f;
+  transform: rotate(90deg);
+}
+
+ul.iconos-compartir li:first-child:hover:before, ul li:last-child:hover:after {
+  border-bottom: 20px solid #000;
+}
+
+
+/* Colors */
+
+.compartir-email:hover { 
+  color: #3f5598; 
+}
+
+.compartir-facebook:hover { 
+  color: #3f5598; 
+}
+
+.compartir-twitter:hover { 
+  color: #3ac1f8; 
+}
+
+.compartir-google:hover { 
+  color: #da2d2e; 
+}
+
+.compartir-pinterest:hover { 
+  color: #66269e; 
+}
+
+.compartir-linkedin:hover { 
+  color: #1c66c2; 
+}
+
+.compartir-imprimir:hover { 
+  color: #3f5598; 
+}
+
+
+

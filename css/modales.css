@@ -1,0 +1,38 @@
+.modal-content {
+  background: #2b2b2b;
+  border-radius: 0;
+  border: 1px solid #888;
+}
+
+.modal-header, .modal-footer {
+  background: #1C1C1C;
+  border: none;
+}
+
+.modal-header h4 {
+  color: #FFF;
+  border: none;
+  text-transform: uppercase;
+}
+
+.modal-footer button {
+  font-size: 16px;
+  background: transparent;
+  color: #0fa8bd;
+  text-align: center;
+  width: 120px;
+  height: 50px;
+  line-height: 40px;
+  border: .2em solid #0fa8bd;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.modal-footer button:hover {
+  background: transparent;
+  color: #FFF;
+  border-color: #0fa8bd;
+}
+
+
+

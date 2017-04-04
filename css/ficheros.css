@@ -1,0 +1,155 @@
+
+.icons {
+  /*
+  font-size: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  */
+  text-align: center;
+}
+
+.icono-descarga {
+  display: inline-block;
+  width: 40px;
+  height: 50px;
+  /*border-radius: 2px;*/
+  cursor: pointer;
+  position: relative;
+  margin: 0 5px;
+}
+
+.icono-descarga::after {
+  content: '';
+  position: absolute;
+  display: block;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  /*border-radius: 0 2px;*/
+  transition: all 0.2s linear;
+  backface-visibility: hidden;
+}
+
+.icono-doc {
+  background-color: #4285f4;
+}
+
+.icono-doc::after {
+  background: linear-gradient(45deg, #8ab4f8 50%, #fff 50%);
+}
+
+.icono-doc i::before {
+  content: '☰';
+}
+
+.icono-pdf {
+  background-color: #db4437;
+}
+
+.icono-pdf::after {
+  background: linear-gradient(45deg, #e78178 50%, #fff 50%);
+}
+
+.icono-pdf i::before {
+  content: '☵';
+}
+
+.icono-txt {
+  background-color: #f5b707;
+}
+
+.icono-txt::after {
+  background: linear-gradient(45deg, #facd4f 50%, #fff 50%);
+}
+
+.icono-txt i::before {
+  content: '⊟';
+}
+
+.icono-epub {
+  background-color: #0f9d58;
+}
+
+.icono-epub::after {
+  background: linear-gradient(45deg, #16e37f  50%, #fff 50%);
+}
+
+.icono-epub i::before {
+  content: '⧉';
+}
+
+.icono-xml {
+  background-color: #00a78e;
+}
+
+.icono-xml::after {
+  background: linear-gradient(45deg, #00f4cf 50%, #fff 50%);
+}
+
+.icono-xml i::before {
+  content: '< >';
+}
+
+.icono-descarga i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  font-size: 10px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.icono-descarga i::before, .icono-descarga i::after {
+  display: block;
+  transition: all 0.2s linear;
+}
+
+.icono-descarga i::before {
+  text-align: center;
+  font-size: 12px;
+  opacity: 0;
+  transform: translateY(5px);
+}
+
+.icono-descarga i::after {
+  content: attr(title);
+  transform: translateY(-5px);
+}
+
+/*
+.icon:hover {
+  border-radius: 2px 4px 2px 2px;
+}
+*/
+
+.icono-descarga-activo {
+  width: 36px;
+  height: 46px;
+}
+
+.icono-descarga-activo::after {
+  width: 12px;
+  height: 12px;
+}
+
+.icono-descarga:hover::after {
+  width: 12px;
+  height: 12px;
+}
+
+.icono-descarga:hover i::before {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.icono-descarga:hover i::after {
+  transform: translateY(0);
+}
+
+
+
