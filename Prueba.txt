@@ -1,0 +1,8 @@
+"Empresa Talleres Perico" 400 328
+c 50 50 40 red black
+r 10 20 300 100 blue green
+l 0 0 200 200 #F00
+l 200 0 0 200 #F00
+e 100 100 40 20 yellow black
+t 0 15 black "Talleres Perico"
+t 0 45 black "Bueno, bonito y barato"
