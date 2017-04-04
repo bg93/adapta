@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+
+<html lang="es" ng-app="adapta">
+
+	<head>
+
+  		<meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Adapt@">
+        <meta name="author" content="Brandon Mendez Martinez">
+
+  		<title>ADAPT@</title>
+
+  		<!-- CSS Bootstrap -->
+        <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css" />
+
+        <!-- CSS Principal - Calculadora -->
+  		<link rel="stylesheet" href="css/style.css" />  
+
+  		<!-- Font Awesome -->
+  		<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css" />
+
+  		<!-- Froala Editor -->
+		<link rel="stylesheet" href="vendor/froala/css/froala_editor.min.css" />
+		<link rel="stylesheet" href="vendor/froala/css/froala_style.min.css" />
+		<link rel="stylesheet" href="vendor/froala/css/themes/custom-theme.css" />
+
+
+	</head>
+
+	<body ng-controller="adaptaCtrl">
+
+
+		<!-- Cabecera -->
+		<!--
+    	<header class="col-sm-12 col-xs-12">
+        	<h1 class="text-center">ADAPT@</h1>
+    	</header>
+    	-->
+
+        <!-- Menu -->
+        <!--<div ui-view></div>-->
+
+
+        <div class="accordian">
+    <ul>
+    	<!--
+        <li>
+            <div class="image_title">
+                <a href="#">Adapt@</a>
+            </div>
+            <a href="#">
+                <img src="http://thecodeplayer.com/uploads/media/3yiC6Yq.jpg"/>
+            </a>
+        </li>
+        -->
+        <li>
+            <div class="titulo-menu">
+                <a href="#">ADAPT@</a>
+            </div>
+            <div id="menu-adapta" class="item-acordeon">
+            	<div id="contenido-menu-adapta" class="contenido-menu">
+            		<i class="glyphicon glyphicon-pushpin"></i>
+            		<span id="logo">Adapta</span>
+            	</div>
+            </div>
+        </li>
+        <li>
+            <div class="titulo-menu">
+                <a href="#">OPCIONES</a>
+            </div>
+            <div id="menu-opciones" class="item-acordeon">
+            	<div id="contenido-menu-opciones" class="contenido-menu">
+            		
+
+
+            		<div class='toggle' id='switch'>
+		<div class='toggle-text-off'>OFF</div>
+		<div class='glow-comp'></div>
+		<div class='toggle-button'></div>
+		<div class='toggle-text-on'>ON</div>
+</div>
+  
+
+
+
+
+
+
+
+            	</div>
+            </div>
+        </li>
+        <li>
+            <div class="titulo-menu">
+                <a href="#">RECURSOS</a>
+            </div>
+            <div id="menu-recursos" class="item-acordeon">
+            	<div id="contenido-menu-recursos" class="contenido-menu">
+            		
+
+
+
+
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th>P1</th>
+          <th>P2</th>
+          <th>P3</th>
+          <th>P4</th>
+          <th>P5</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+        <tr>
+          <td>Prueba</td>
+          <td>Prueba</td>
+          <td>Prueba</td>
+          <td>Prueba</td>
+          <td>Prueba</td>
+        </tr>
+        <tr>
+          <td>Prueba</td>
+          <td>Prueba</td>
+          <td>Prueba</td>
+          <td>Prueba</td>
+          <td>Prueba</td>
+        </tr>
+        <tr>
+          <td>Prueba</td>
+          <td>Prueba</td>
+          <td>Prueba</td>
+          <td>Prueba</td>
+          <td>Prueba</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+
+
+            	</div>
+            </div>
+        </li>
+        <li>
+            <div class="titulo-menu">
+                <a href="#">CONFIGURACIÓN</a>
+            </div>
+            <div id="menu-configuracion" class="item-acordeon">
+            	<div id="contenido-menu-configuracion" class="contenido-menu">
+            		prueba <br>
+            		prueba <br>
+            		prueba <br>
+            	</div>
+            </div>
+        </li>
+        <li>
+            <div class="titulo-menu">
+                <a href="#">INFORMACIÓN</a>
+            </div>
+            <div id="menu-informacion" class="item-acordeon">
+            	<div id="contenido-menu-informacion" class="contenido-menu">
+            		prueba <br>
+            		prueba <br>
+            		prueba <br>
+            	</div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+
+
+        <!-- Panel izquierdo - Contenido (texto) a procesar -->
+        <div class="col-md-5 col-sm-12 col-xs-12 panel-normal panel-texto">
+            <!--
+            <input id="fichero" name="fichero" class="examinar" type="file" accept=".txt" ng-model="fichero" onchange="angular.element(this).scope().cargar(this)">
+            <label for="fichero" class="control-label label-fichero"></label>
+            -->
+            <!--<label for="texto" class="control-label sombra-texto">TEXTO a procesar</label>-->
+            <textarea id="original" name="original" class="form-control" ng-model="original" placeholder="Texto a procesar..." required></textarea>
+
+        </div>
+
+        <div id="contenedor-central" class="col-md-2 col-sm-12 col-xs-12">
+            <!--
+            <button type="submit" id="submit" class="boton" value="Procesar" ng-click="procesar()">
+                Procesar
+            </button>
+            -->
+
+            <input id="fichero" name="fichero" class="examinar" type="file" accept=".txt" ng-model="fichero" onchange="angular.element(this).scope().cargar(this)">
+
+            <span class="arrow" ng-click="procesar()">PROCESAR</span>
+
+            <div class="loading"></div>
+
+            <div id="botones-centro">
+            	<span class="glyphicon glyphicon-floppy-disk icono-guardar" aria-hidden="true"></span>
+            	<span class="glyphicon glyphicon-save icono-descargar" aria-hidden="true"></span>
+            </div>
+
+        </div>
+
+        <!-- Panel derecho - Resultado (texto procesado) -->
+        <div class="col-md-5 col-sm-12 col-xs-12 panel-normal panel-texto">
+            <textarea id="procesado" name="procesado" class="form-control" ng-model="procesado" placeholder="Texto procesado" required></textarea>
+        </div>
+
+
+
+        <!--
+        <div class="col-xs-12 panel-normal panel-texto">
+
+            <div class="texto-procesado" id="texto-procesado" ng-bind-html-unsafe="procesado">
+            </div>
+
+        </div>
+        -->
+
+        <!--
+        <a href="php/sample1.php">PRUEBA</a>
+        -->
+
+
+        <!-- Pie de pagina -->
+        <footer class="footer navbar-fixed-bottom text-center">
+            ADAPT@ &copy; 2017 · <a href="mailto:staff.adapt@gmail.com">CONTACTO</a>
+        </footer>
+
+
+		<!-- jQuery -->
+	    <script src="vendor/jquery/js/jquery-3.1.1.min.js"></script>
+
+		<!-- Froala Editor -->
+		<script src="vendor/froala/js/froala_editor.min.js"></script>
+		<script src="vendor/froala/js/languages/es.js"></script>
+
+
+	    <!-- JavaScript Bootstrap -->
+	    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+		<!-- Angular  -->
+		<script src="vendor/angular/angular.js"></script>
+        <!--<script src="vendor/angular/angular-route.js"></script>-->
+        <script src="vendor/angular/angular-ui-router.js"></script> 
+		  
+		<!-- Archivos adicionales Angular -->
+		<script src="app/app.js"></script>  
+		<!--<script src="app/services/adaptaService.js"></script>-->
+        <!--<script src="app/directives/vacioDirective.js"></script>-->
+        <!--<script src="app/directives/usuarioDirective.js"></script>-->
+        <!--<script src="app/directives/passwordDirective.js"></script>--> 
+		<script src="app/controllers/adaptaCtrl.js"></script>
+		<script src="app/routes/routes.js"></script>
+
+	</body>
+
+</html>
