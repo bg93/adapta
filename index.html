@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+
+<html lang="es" ng-app="adapta">
+
+	<head>
+
+  		<meta charset="utf-8">
+      <meta name="viewport" content="initial-scale=1, width=device-width">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="description" content="Adapt@">
+      <meta name="author" content="Brandon Mendez Martinez">
+
+  		<title>ADAPT@</title>
+
+  		<!-- CSS Bootstrap -->
+      <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css" />
+
+      <!-- CSS Principal -->
+  		<link rel="stylesheet" href="css/style.css" />  
+      <!-- CSS Modales -->
+      <link rel="stylesheet" href="css/modales.css" />  
+      <!-- CSS Ficheros -->
+      <link rel="stylesheet" href="css/ficheros.css" />
+      <!-- CSS Redes Sociales -->
+      <link rel="stylesheet" href="css/redesSociales.css" />   
+
+  		<!-- Font Awesome -->
+  		<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css" />
+
+  		<!-- Froala Editor -->
+		  <link rel="stylesheet" href="vendor/froala/css/froala_editor.min.css" />
+		  <link rel="stylesheet" href="vendor/froala/css/froala_style.min.css" />
+		  <link rel="stylesheet" href="vendor/froala/css/themes/custom-theme.css" />
+      <link rel="stylesheet" href="vendor/froala/css/plugins/char_counter.min.css" />
+
+      <link rel="stylesheet" href="vendor/jquery/css/jquery-ui.css">
+
+
+	</head>
+
+	<body ng-controller="adaptaCtrl">
+
+
+		<!-- Cabecera - Menu -->
+    <div class="accordian">
+      <ul>
+
+        <!-- Inicio -->
+        <li id="menu-adapta" class="item-menu" ng-include="'app/views/menu/inicio.html'"></li>
+        <!-- Opciones -->
+        <li id="menu-opciones" class="item-menu" ng-include="'app/views/menu/opciones.html'"></li>
+        <!-- Recursos -->
+        <li id="menu-recursos" class="item-menu" ng-include="'app/views/menu/recursos.html'"></li>
+        <!-- Configuracion -->
+        <li id="menu-configuracion" class="item-menu" ng-include="'app/views/menu/configuracion.html'"></li>
+        <!-- Informacion -->
+        <li id="menu-informacion" class="item-menu" ng-include="'app/views/menu/informacion.html'"></li>
+
+      </ul>
+    </div>
+
+
+    <!-- Panel izquierdo - Contenido (texto) a procesar -->
+    <div class="col-md-5 col-sm-12 col-xs-12 panel-normal panel-texto">
+
+      <div id="original" class="contenedor-froala" name="original" ng-model="original"></div>
+      <!--<textarea id="original" name="original" class="form-control" ng-model="original" placeholder="Texto a procesar"></textarea>-->
+
+    </div>
+
+
+    <div id="contenedor-central" class="col-md-2 col-sm-12 col-xs-12">
+
+      <!-- Falta poner cursor "pointer" en el icono -->
+      <div class="contenedor-fichero">
+        <input id="fichero" name="fichero" class="fichero" type="file" accept=".txt" ng-model="fichero" onchange="angular.element(this).scope().cargar(this)">
+        <i class="glyphicon glyphicon-file icono-fichero"></i> 
+      </div>
+
+      <span id="procesar" class="arrow procesar-deshabilitado" ng-click="procesar()" >PROCESAR</span>
+
+      <div id="loading" class="loading oculto invisible"></div>
+
+      <div id="botones-centro">
+        <span id="guardar" class="fa fa-floppy-o fa-2x icono-guardar procesar-deshabilitado" aria-hidden="true" data-toggle="modal" data-target="#modalGuardar"></span>
+        <span id="descargar" class="fa fa-download fa-2x icono-descargar procesar-deshabilitado" aria-hidden="true" data-toggle="modal" data-target="#modalDescargar"></span>
+        <span id="compartir" class="fa fa-share-alt fa-2x icono-compartir procesar-deshabilitado" aria-hidden="true" data-toggle="modal" data-target="#modalCompartir"></span>
+      </div>
+
+    </div>
+
+    <!-- Panel derecho - Resultado (texto procesado) -->
+    <div class="col-md-5 col-sm-12 col-xs-12 panel-normal panel-texto">
+
+      <div class="container ui-widget-content">
+        <h2>Palabra</h2>
+        <span class="close"></span>
+            
+        <div class="slider-container">
+          <div class="slider-turn">
+
+            <div class="panel-container">
+              Definición 1 ...
+              <div class="ui-widget-content ui-corner-tr contenedor-imagen">
+                <img src="assets/img/tigre.jpg" alt="Tigre" width="70" height="70">
+                <a href="assets/img/tigre.jpg" title="Zoom" class="glyphicon glyphicon-zoom-in"></a>
+                <a href="link/to/trash/script/when/we/have/js/off" title="Añadir" class="glyphicon glyphicon-plus"></a>
+              </div>
+              <audio controls>
+                <source src="coche.mp3" type="audio/mpeg">
+                Tu navegador no puede reproducir este audio.
+              </audio>
+            </div>
+
+            <div class="panel-container">
+              Definición 2 ...
+              <div class="ui-widget-content ui-corner-tr contenedor-imagen">
+                <img src="assets/img/leon.jpg" alt="Leon" width="70" height="70">
+                <a href="assets/img/leon.jpg" title="Zoom" class="glyphicon glyphicon-zoom-in"></a>
+                <a href="link/to/trash/script/when/we/have/js/off" title="Añadir" class="glyphicon glyphicon-plus"></a>
+              </div>
+              <audio controls>
+                <source src="coche.mp3" type="audio/mpeg">
+                Tu navegador no puede reproducir este audio.
+              </audio>
+            </div>
+
+            <div class="panel-container">
+              Definición 3 ...
+              <div class="ui-widget-content ui-corner-tr contenedor-imagen">
+                <img src="assets/img/oso.png" alt="Oso" width="70" height="70">
+                <a href="assets/img/oso.png" title="Zoom" class="glyphicon glyphicon-zoom-in"></a>
+                <a href="link/to/trash/script/when/we/have/js/off" title="Añadir" class="glyphicon glyphicon-plus"></a>
+              </div>
+              <audio controls>
+                <source src="coche.mp3" type="audio/mpeg">
+                Tu navegador no puede reproducir este audio.
+              </audio>
+            </div>
+
+            <div class="panel-container">
+              Definición 4 ...
+              <div class="ui-widget-content ui-corner-tr contenedor-imagen">
+                <img src="assets/img/tigre.jpg" alt="Tigre" width="70" height="70">
+                <a href="assets/img/tigre.jpg" title="Zoom" class="glyphicon glyphicon-zoom-in"></a>
+                <a href="link/to/trash/script/when/we/have/js/off" title="Añadir" class="glyphicon glyphicon-plus"></a>
+              </div>
+              <audio controls>
+                <source src="coche.mp3" type="audio/mpeg">
+                Tu navegador no puede reproducir este audio.
+              </audio>
+            </div>
+
+            <div class="panel-container">
+              Definición 5 ...
+              <div class="ui-widget-content ui-corner-tr contenedor-imagen">
+                <img src="assets/img/tigre.jpg" alt="Tigre" width="70" height="70">
+                <a href="assets/img/tigre.jpg" title="Zoom" class="glyphicon glyphicon-zoom-in"></a>
+                <a href="link/to/trash/script/when/we/have/js/off" title="Añadir" class="glyphicon glyphicon-plus"></a>
+              </div>
+              <audio controls>
+                <source src="coche.mp3" type="audio/mpeg">
+                Tu navegador no puede reproducir este audio.
+              </audio>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="bottom">
+          <div class="step">
+            <ul>
+              <li data-num="1"></li>
+              <li data-num="2"></li>
+              <li data-num="3"></li>
+              <li data-num="4"></li>
+              <li data-num="5"></li>
+            </ul>
+          </div>
+          <button class="btn">Siguiente</button>
+        </div>
+      </div>
+
+
+
+        <!--
+          <textarea id="procesado" name="procesado" class="form-control" ng-model="procesado" placeholder="Texto procesado" required></textarea>
+        -->
+      <div id="procesado" class="contenedor-froala" name="procesado" ng-model="procesado"></div>
+
+    </div>
+
+
+    <!-- Modal - Guardar -->
+    <div ng-include="'app/views/modales/guardar.html'"></div>
+ 
+    <!-- Modal - Descargar -->
+    <div ng-include="'app/views/modales/descargar.html'"></div>
+
+    <!-- Modal - Compartir -->
+    <div ng-include="'app/views/modales/compartir.html'"></div>
+
+
+    <!-- Pie de pagina -->
+    <footer class="footer navbar-fixed-bottom text-center">
+      ADAPT@ &copy; 2017 · <a href="mailto:staff.adapt@gmail.com">CONTACTO</a>
+    </footer>
+
+
+		<!-- jQuery -->
+	  <script src="vendor/jquery/js/jquery-3.1.1.min.js"></script>  
+    <script src="vendor/jquery/js/jquery-ui.min.js"></script> 
+
+		<!-- Froala Editor -->
+		<script src="vendor/froala/js/froala_editor.min.js"></script>
+		<script src="vendor/froala/js/languages/es.js"></script>
+    <script src="vendor/froala/js/plugins/char_counter.min.js"></script>
+
+
+	  <!-- JavaScript Bootstrap -->
+	  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+		<!-- Angular  -->
+		<script src="vendor/angular/angular.js"></script>
+    <script src="vendor/angular/angular-route.js"></script>
+    <script src="vendor/angular/angular-ui-router.js"></script> 
+		  
+		<!-- Archivos adicionales Angular -->
+		<script src="app/app.js"></script>  
+		<script src="app/services/adaptaService.js"></script>
+    <!--<script src="app/directives/vacioDirective.js"></script>-->
+    <!--<script src="app/directives/usuarioDirective.js"></script>-->
+    <!--<script src="app/directives/passwordDirective.js"></script>--> 
+		<script src="app/controllers/adaptaCtrl.js"></script>
+    <script src="app/controllers/inicioCtrl.js"></script>
+    <script src="app/controllers/opcionesCtrl.js"></script>
+    <script src="app/controllers/recursosCtrl.js"></script>
+    <script src="app/controllers/configuracionCtrl.js"></script>
+    <script src="app/controllers/informacionCtrl.js"></script>
+		<script src="app/routes/routes.js"></script>
+
+	</body>
+
+</html>
