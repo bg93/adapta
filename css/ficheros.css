@@ -1,5 +1,5 @@
 
-.icons {
+.iconos-ficheros {
   /*
   font-size: 0;
   position: absolute;
@@ -8,9 +8,11 @@
   transform: translate(-50%, -50%);
   */
   text-align: center;
+  padding-bottom: 15px;
+  border-bottom: 0.5px solid #FFF;
 }
 
-.icono-descarga {
+.icono-fichero {
   display: inline-block;
   width: 40px;
   height: 50px;
@@ -20,7 +22,7 @@
   margin: 0 5px;
 }
 
-.icono-descarga::after {
+.icono-fichero::after {
   content: '';
   position: absolute;
   display: block;
@@ -93,7 +95,7 @@
   content: '< >';
 }
 
-.icono-descarga i {
+.icono-fichero i {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -104,19 +106,19 @@
   font-weight: 500;
 }
 
-.icono-descarga i::before, .icono-descarga i::after {
+.icono-fichero i::before, .icono-fichero i::after {
   display: block;
   transition: all 0.2s linear;
 }
 
-.icono-descarga i::before {
+.icono-fichero i::before {
   text-align: center;
   font-size: 12px;
   opacity: 0;
   transform: translateY(5px);
 }
 
-.icono-descarga i::after {
+.icono-fichero i::after {
   content: attr(title);
   transform: translateY(-5px);
 }
@@ -127,29 +129,26 @@
 }
 */
 
-.icono-descarga-activo {
+.icono-fichero-activo {
   width: 36px;
   height: 46px;
 }
 
-.icono-descarga-activo::after {
+.icono-fichero-activo::after {
   width: 12px;
   height: 12px;
 }
 
-.icono-descarga:hover::after {
+.icono-fichero:hover::after {
   width: 12px;
   height: 12px;
 }
 
-.icono-descarga:hover i::before {
+.icono-fichero:hover i::before {
   transform: translateY(0);
   opacity: 1;
 }
 
-.icono-descarga:hover i::after {
+.icono-fichero:hover i::after {
   transform: translateY(0);
 }
-
-
-

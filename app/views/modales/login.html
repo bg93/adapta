@@ -1,0 +1,46 @@
+<!-- Modal - Login -->
+
+<div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="loginCtrl">
+
+  <div class="modal-dialog" role="document">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+        <h4 class="modal-title" id="tituloModalLogin">Login</h4>
+      </div>
+
+      <form name="formulario_login" ng-submit="login()" role="form" class="form autenticacion">
+
+        <div class="modal-body">
+
+          <div class="grid">
+
+            <div class="formulario_campo form-group" ng-class="{'has-error': formulario_login.login_email.$dirty && formulario_login.login_email.$error.required}">
+              <label for="login_email" class="label-form"><i class="fa fa-envelope" aria-hidden="true"></i><span class="hidden">Email</span></label>
+              <input id="login_email" type="text" name="login_email" ng-model="login_email" class="formulario_input" placeholder="Email" required>
+              <span class="error-form" ng-show="formulario_login.login_email.$dirty && formulario_login.login_email.$error.required">Debes introducir tu email.</span>
+            </div>
+
+            <div class="formulario_campo form-group" ng-class="{'has-error': formulario_login.login_password.$dirty && formulario_login.login_password.$error.required}">
+              <label for="login_password" class="label-form"><i class="fa fa-lock" aria-hidden="true"></i><span class="hidden">Contraseña</span></label>
+              <input id="login_password" type="password" name="login_password" ng-model="login_password" class="formulario_input" placeholder="Contraseña" required>
+              <span class="error-form" ng-show="formulario_login.login_password.$dirty && formulario_login.login_password.$error.required">Debes introducir tu contraseña.</span>
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="submit" ng-disabled="formulario_login.$invalid" class="btn btn-primary">Entrar</button>
+          </div>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>

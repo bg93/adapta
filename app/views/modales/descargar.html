@@ -1,6 +1,6 @@
 <!-- Modal - Descargar -->
 
-<div class="modal fade" id="modalDescargar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="modalDescargar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="descargarCtrl">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -8,17 +8,48 @@
         <h4 class="modal-title" id="tituloModalDescargar">Descargar</h4>
       </div>
       <div class="modal-body">
-        
 
 
-        <div class="icons">
-          <div id="descargar-pdf" class="icono-descarga icono-pdf"><i title="pdf"></i></div>
-          <div id="descargar-epub" class="icono-descarga icono-epub"><i title="epub"></i></div>
-          <div id="descargar-doc" class="icono-descarga icono-doc"><i title="doc"></i></div>
-          <div id="descargar-txt" class="icono-descarga icono-txt"><i title="txt"></i></div>
-          <div id="descargar-xml" class="icono-descarga icono-xml"><i title="xml"></i></div>
+        <!-- Contenedor Iconos de descarga de ficheros -->
+        <div class="iconos-ficheros">
+          <div id="descargar-pdf" class="icono-fichero icono-pdf"><i title="pdf"></i></div>
+          <div id="descargar-epub" class="icono-fichero icono-epub"><i title="epub"></i></div>
+          <div id="descargar-doc" class="icono-fichero icono-doc"><i title="doc"></i></div>
+          <div id="descargar-txt" class="icono-fichero icono-txt"><i title="txt"></i></div>
+          <div id="descargar-xml" class="icono-fichero icono-xml"><i title="xml"></i></div>
         </div>
 
+        <!-- Contenedor paneles de elección del texto de descarga -->
+        <div class="contenedor-eleccion-descarga">
+          <form name="formulario_descarga" ng-submit="descarga()" role="form" class="form autenticacion">
+            <!-- Panel de descarga del texto original -->
+            <div class="panel-eleccion-texto panel-eleccion-texto-original">
+              <div class="formulario_campo form-group check-descarga">
+                <input class="styled-checkbox formulario_input" id="descarga_original" type="checkbox" value="original" ng-model="descarga_original">
+                <label for="descarga_original">Texto original</label>
+              </div>
+              <div ng-show="descarga_original" class="formulario_campo form-group campo-descarga" ng-class="{'has-error': formulario_descarga.nombre_descarga_original.$dirty && formulario_descarga.nombre_descarga_original.$error.required}">
+                <input id="nombre_descarga_original" type="text" name="nombre_descarga_original" ng-model="nombre_descarga_original" class="formulario_input" placeholder="Nombre del fichero" required>
+                <!--
+                <span class="error-form" ng-show="formulario_descarga.nombre_descarga_original.$dirty && formulario_descarga.nombre_descarga_original.$error.required">Debes introducir un nombre.</span>
+                -->
+              </div>
+            </div>
+            <!-- Panel de descarga del texto procesado -->
+            <div class="panel-eleccion-texto panel-eleccion-texto-procesado">
+              <div class="formulario_campo form-group check-descarga">
+                <input class="styled-checkbox formulario_input" id="descarga_procesado" type="checkbox" value="procesado" ng-model="descarga_procesado">
+                <label for="descarga_procesado">Texto procesado</label>
+              </div>
+              <div ng-show="descarga_procesado" class="formulario_campo form-group campo-descarga" ng-class="{'has-error': formulario_descarga.nombre_descarga_procesado.$dirty && formulario_descarga.nombre_descarga_procesado.$error.required}">
+                <input id="nombre_descarga_procesado" type="text" name="nombre_descarga_procesado" ng-model="nombre_descarga_procesado" class="formulario_input" placeholder="Nombre del fichero" required>
+                <!--
+                <span class="error-form" ng-show="formulario_descarga.nombre_descarga_procesado.$dirty && formulario_descarga.nombre_descarga_procesado.$error.required">Debes introducir un nombre.</span>
+                -->
+              </div>
+            </div>
+          </form>
+        </div>
 
 
       </div>

@@ -1,0 +1,58 @@
+<!-- Modal - Compartir -->
+
+<div class="modal fade" id="modalRegistro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="registroCtrl">
+
+  <div class="modal-dialog" role="document">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+        <h4 class="modal-title" id="tituloModalRegistro">Registro</h4>
+      </div>
+
+      <form name="formulario_registro" ng-submit="registro()" role="form" class="form autenticacion">
+
+        <div class="modal-body">
+
+          <div class="grid">
+
+            <div class="formulario_campo form-group" ng-class="{'has-error': formulario_registro.registro_usuario.$dirty && formulario_registro.registro_usuario.$error.required}">
+              <label for="registro_usuario" class="label-form"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden">Usuario</span></label>
+              <input id="registro_usuario" type="text" name="registro_usuario" ng-model="registro_usuario" class="formulario_input" placeholder="Usuario" required>
+              <span class="error-form" ng-show="formulario_registro.registro_usuario.$dirty && formulario_registro.registro_usuario.$error.required">Debes introducir un nombre de usuario.</span>
+            </div>
+
+            <div class="formulario_campo form-group" ng-class="{'has-error': formulario_registro.registro_email.$dirty && formulario_registro.registro_email.$error.required}">
+              <label for="registro_email" class="label-form"><i class="fa fa-envelope" aria-hidden="true"></i><span class="hidden">Email</span></label>
+              <input id="registro_email" type="text" name="registro_email" ng-model="registro_email" class="formulario_input" placeholder="Email" required>
+              <span class="error-form" ng-show="formulario_registro.registro_email.$dirty && formulario_registro.registro_email.$error.required">Debes introducir un email.</span>
+            </div>
+
+            <div class="formulario_campo form-group" ng-class="{'has-error': formulario_registro.registro_password.$dirty && formulario_registro.registro_password.$error.required}">
+              <label for="registro_password" class="label-form"><i class="fa fa-lock" aria-hidden="true"></i><span class="hidden">Contraseña</span></label>
+              <input id="registro_password" type="password" name="registro_password" ng-model="registro_password" class="formulario_input" placeholder="Contraseña" required>
+              <span class="error-form" ng-show="formulario_registro.registro_password.$dirty && formulario_registro.registro_password.$error.required">Debes introducir una contraseña.</span>
+            </div>
+
+            <div class="formulario_campo form-group" ng-class="{'has-error': formulario_registro.registro_password2.$dirty && formulario_registro.registro_password2.$error.required}">
+              <label for="registro_password2" class="label-form"><i class="fa fa-lock" aria-hidden="true"></i><span class="hidden">Repetir contraseña</span></label>
+              <input id="registro_password2" type="password" name="registro_password2" ng-model="registro_password2" class="formulario_input" placeholder="Repetir contraseña" required>
+              <span class="error-form" ng-show="formulario_registro.registro_password2.$dirty && formulario_registro.registro_password2.$error.required">Debes repetir la contraseña.</span>
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="submit" ng-disabled="formulario_registro.$invalid" class="btn btn-primary">Registrarme</button>
+          </div>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>

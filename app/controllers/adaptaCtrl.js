@@ -1,484 +1,398 @@
-var adaptaCtrl = app.controller('adaptaCtrl',function ($scope, $compile, $state, adaptaService) {
-
-    $scope.metodo = "l";
-
-    //DRAG & DROP IMAGENES
-    $( function() {
- 
-    // There's the gallery and the trash
-    //var $gallery = $("#gallery");
-    var $trash = $("#trash");
- 
-    // Let the gallery items be draggable
-    $(".contenedor-imagen").draggable({
-      cancel: "a.glyphicon", // clicking an icon won't initiate dragging
-      revert: "invalid", // when not dropped, the item will revert back to its initial position
-      containment: "document",
-      helper: "clone",
-      cursor: "move"
-    });
- 
-    // Let the trash be droppable, accepting the gallery items
-    $trash.droppable({
-      accept: ".contenedor-imagen",
-      drop: function( event, ui ) {
-        deleteImage( ui.draggable );
-      }
-    });
- 
-    // Image deletion function
-    var trash_icon = "<a href='link/to/trash/script/when/we/have/js/off' title='Eliminar' class='glyphicon glyphicon-trash'></a>";
-    function deleteImage( $item ) {
-        //$item = $item.clone();
-      $item.fadeOut(function() {
-        var $list = $( $trash ).length ?
-          $( $trash ) :
-          $( "<ul class='ui-helper-reset'/>" ).appendTo( $trash );
- 
-        $item.find( "a.glyphicon-plus" ).remove();
-        $item.append( trash_icon ).appendTo( $list ).fadeIn(function() {
-          $item
-            .animate({ width: "72px", height: "80px" })
-            .find( "img" )
-              .animate({ height: "60px" });
-        });
-      });
-    }
- 
-    function recycleImage( $item ) {
-      $item.fadeOut(function() {
-        $item
-          .find( "a.glyphicon-trash" )
-            .remove()
-            /*
-          .end()
-          .css( "width", "72px")
-          .append( trash_icon )
-          .find( "img" )
-            .css( "height", "72px" )
-          .end()
-          .appendTo( $gallery )
-          .fadeIn();
-          */
-      });
-    }
- 
-    // Image preview function, demonstrating the ui.dialog used as a modal window
-    function viewLargerImage( $link ) {
-        alert(JSON.stringify($link));
-      var src = $link.attr( "href" ),
-        title = $link.siblings( "img" ).attr( "alt" ),
-        $modal = $( "img[src$='" + src + "']" );
- 
-      if ( $modal.length ) {
-        $modal.dialog( "open" );
-      } else {
-        var img = $( "<img alt='" + title + "' width='300' height='300' style='display: none; padding: 8px;' />" )
-          .attr( "src", src ).appendTo( "body" );
-        setTimeout(function() {
-          img.dialog({
-            title: title,
-            width: 400,
-            modal: true
-          });
-        }, 1 );
-      }
-    }
- 
-    // Resolve the icons behavior with event delegation
-    $( ".contenedor-imagen" ).on( "click", function( event ) {
-      var $item = $( this ),
-        $target = $( event.target );
- 
-      if ( $target.is( "a.glyphicon-plus" ) ) {
-        deleteImage( $item );
-      } else if ( $target.is( "a.glyphicon-zoom-in" ) ) {
-        viewLargerImage( $target );
-      } else if ( $target.is( "a.glyphicon-trash" ) ) {
-        recycleImage( $item );
-      }
- 
-      return false;
-    });
-  } );
+var adaptaCtrl = app.controller('adaptaCtrl', function ($scope, $compile, $state, $http, adaptaService) {
 
 
 
 
+    // $(".dynacloud").dynaCloud();
 
+    //EDITORES
+    CKEDITOR.replace('original');
+    CKEDITOR.replace('procesado');
 
+    // -------------------------------------------------------------------------
 
-
-
-
-
-
-
-
-
-
-
-
-    //TOOLTIP
-
-    $(function() {
-        $(".container").draggable();
+    //BOTÓN DE CARGA DE FICHERO
+    $(".icono-fichero").on("click", function (e) {
+        e.preventDefault();
     });
 
+    // -------------------------------------------------------------------------
 
+    //CARGA DE FICHERO
+    $scope.cargar = function (element) {
 
+        //Se lee el fichero
 
-    $(document).ready(function () {
-
-
-
-  var nbP = $('.container .panel-container').length;
-  var w = parseInt($('.container .panel-container').css("width"));
-  var max = (nbP - 1) * w;
-  $("ul li[data-num='1']").addClass('active');
-  $('.step span').html('Step 1');
-  
-  $('body').on('click','.btn', function(){
-    var margL = parseInt($('.slider-turn').css('margin-left'));
-    var modulo = margL%w;
-    if (-margL < max && modulo == 0) {
-      margL -= w;
-   
-      $('.slider-turn').animate({
-        'margin-left':margL
-      },300);
-      $('ul li.active').addClass('true').removeClass('active');
-      var x = -margL/w +1;
-      $('ul li[data-num="'+x+'"]').addClass('active');
-      $('.step span').html("Step "+x);
-    }
-    else  {}
-  });
-  
-  $('body').on('click','.close',function(){
-    $('.container').animate({
-      'opacity':0
-    },600);
-    $('.container').animate({
-      'top':-1200
-    }, {
-      duration: 1000,
-      queue: false
-    });
-    /*
-    $('.open').animate({
-      'top':'50%'
-    });
-    */
-  });
-  
-  $('body').on('click','.open',function() {
-    /*
-    $('.open').animate({
-      'top':-1000
-    });
-    */
-    $('.container').animate({
-      'opacity':1
-    },400);
-    $('.container').animate({
-      'top':'50%'
-    }, {
-      duration: 800,
-      queue: false
-    });
-  });
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    $(window).on("load resize ", function() {
-      var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
-      $('.tbl-header').css({'padding-right':scrollWidth});
-    }).resize();
-
-
-
-
-
-
-//MENU
-    
-    //Estado inicial de cada item del menu
-    $(document).ready(function() {
-        $('#menu-adapta').addClass('identificador-menu-activo menu-activo');
-        $('#chincheta-adapta').addClass('chincheta-activa');
-        $('#menu-opciones').addClass('identificador-menu-inactivo menu-inactivo');
-        $('#menu-recursos').addClass('identificador-menu-inactivo menu-inactivo');
-        $('#menu-configuracion').addClass('identificador-menu-inactivo menu-inactivo');
-        $('#menu-informacion').addClass('identificador-menu-inactivo menu-inactivo');
-    });
-
-    //Se coloca la chincheta (se hace fijo el item) o se quita al pulsar en un item del menu
-    $(document).on('click', '.chincheta', function() {
-
-        if($(this).hasClass('chincheta-activa')) {
-
-            $(this).removeClass('chincheta-activa');
-            $('.menu-activo').removeClass('menu-activo');
-            $('.identificador-menu-activo').removeClass('identificador-menu-activo');
-
-            $('.menu-inactivo').removeClass('menu-inactivo');
-            $('.identificador-menu-inactivo').removeClass('identificador-menu-inactivo');
-        }
-
-        else {
-
-            $('.chincheta-activa').removeClass('chincheta-activa');
-            $('.menu-activo').removeClass('menu-activo');
-            $('.identificador-menu-activo').addClass('identificador-menu-inactivo menu-inactivo');
-            $('.identificador-menu-activo').removeClass('identificador-menu-activo');
-
-            $('.item-menu').addClass('identificador-menu-inactivo menu-inactivo');
-
-
-            var elemento = $(this).parent().parent().parent().get(0);
-
-            $(this).addClass('chincheta-activa');
-            $(elemento).removeClass('identificador-menu-inactivo menu-inactivo');
-            $(elemento).addClass('identificador-menu-activo menu-activo');
-            
-        }
-
-    });
-
-    //Se visualiza
-    $(document).on({
-        mouseenter: function () {
-            $('.identificador-menu-activo').removeClass('menu-activo');
-            $('.identificador-menu-activo').addClass('menu-inactivo');
-            $(this).removeClass('menu-inactivo');
-            $(this).addClass('menu-activo');
-        },
-
-        mouseleave: function () {
-            $('.identificador-menu-activo').removeClass('menu-inactivo');
-            $('.identificador-menu-activo').addClass('menu-activo');
-            $(this).removeClass('menu-activo');
-            $(this).addClass('menu-inactivo');
-        }
-    }, '.identificador-menu-inactivo');
-
-
-
-
-
-
-
-
-    //Boton switch on/off
-    $('.toggle').click(function(e){
-      e.preventDefault(); // The flicker is a codepen thing
-      $(this).toggleClass('toggle-on');
-    });
-
-
-
-
-    $(function() { 
-        $('.contenedor-froala').froalaEditor({
-            language: 'es',
-            theme: 'custom',
-            height: 180,
-            //toolbarButtons: ['bold', 'italic', 'underline']
-            toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'color', 'paragraphStyle', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', 'insertHR', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', 'undo', 'redo', 'clearFormatting']
-        }) 
-    });
-
-
-    //Boton PROCESAR
-    var upInteractive = false;
-
-    function autoToggle() {
-      $('.arrow').toggleClass('auto');
-    }
-
-    $('.arrow').hover(function() {
-      upInteractive = true;
-      $('.arrow').removeClass('auto');
-    });
-
-    setInterval(function(){ 
-      
-      //console.log(upInteractive);
-      
-      if(upInteractive === false) {
-        autoToggle();
-      }
-
-    },3000);
-
-
-
-    $('#original').on('froalaEditor.contentChanged', function (e, editor) {
-
-      var min = $scope.minTexto();
-
-      if(min == true) {
-        $scope.habilitaProcesamiento();
-        $scope.habilitaDescargas();
-      }
-
-      else {
-        $scope.deshabilitaProcesamiento();
-        $scope.deshabilitaDescargas();
-      }
-
-    });
-
-
-    $scope.minTexto = function() {
-
-      var txt = $('#original').froalaEditor('html.get');
-      var caracteres = txt.length;
-
-      var min = true;
-
-
-      if(caracteres >= 17) {
-        min = true;
-      }
-
-      else {
-        min = false;
-      }
-
-      return min;
-
-    };
-
-
-
-    $( ".icono-fichero" ).on( "click", function(e) {
-      e.preventDefault();
-
-    });
-
-
-    $scope.setMetodo = function() {
-
-      //adaptaService.setProcesamiento($scope.metodo);
-
-    };
-
-    $scope.habilitaProcesamiento = function() {
-
-      if($scope.minTexto()){
-        $('#procesar').removeClass('procesar-deshabilitado');
-      }
-
-    };
-
-    $scope.deshabilitaProcesamiento = function() {
-
-      $('#procesar').addClass('procesar-deshabilitado');
-
-    };
-
-    $scope.habilitaDescargas = function() {
-
-      if($scope.minTexto()){
-        $('#guardar').removeClass('procesar-deshabilitado');
-        $('#descargar').removeClass('procesar-deshabilitado');
-        $('#compartir').removeClass('procesar-deshabilitado');
-      }
-
-    };
-
-    $scope.deshabilitaDescargas = function() {
-
-      $('#guardar').addClass('procesar-deshabilitado');
-      $('#descargar').addClass('procesar-deshabilitado');
-      $('#compartir').addClass('procesar-deshabilitado');
-
-    };
-
-
-    $scope.cargar = function(element) {
-
-    	var fichero = element.files[0];
+        var fichero = element.files[0];
 
         var reader = new FileReader();
-     
+
         reader.onload = function () {
 
-            //Asi se muestra el fichero entero leido:
-            //$scope.original = reader.result;
-            //$scope.$apply();
-            $('#original').froalaEditor('html.set', reader.result);
-            $('#original').froalaEditor('undo.saveStep');
+            //Se inserta el contenido del fichero en el editor original
+            CKEDITOR.instances.original.setData(reader.result);
 
         };
 
-        reader.readAsText(fichero); 
+        reader.readAsText(fichero);
 
     };
 
+    // -------------------------------------------------------------------------
 
+    //BOTÓN DE PROCESAMIENTO
+    var upInteractive = false;
 
-    $scope.procesar = function() {
+    function autoToggle() {
+        $('.arrow').toggleClass('auto');
+    }
 
+    $('.arrow').hover(function () {
+        upInteractive = true;
+        $('.arrow').removeClass('auto');
+    });
 
-        if(!$('#procesar').hasClass('procesar-deshabilitado')) {
+    setInterval(function () {
+
+        //console.log(upInteractive);
+
+        if (upInteractive === false) {
+            autoToggle();
+        }
+
+    }, 3000);
+
+    // -------------------------------------------------------------------------
+
+    //DETECCIÓN DE CAMBIOS EN EL EDITOR ORIGINAL
+    CKEDITOR.instances.original.on('change', function () {
+
+        var min = $scope.minTexto();
+
+        if (min == true) {
+            $scope.habilitaProcesamiento();
+            $scope.habilitaDescargas();
+        } else {
+            $scope.deshabilitaProcesamiento();
+            $scope.deshabilitaDescargas();
+        }
+
+    });
+
+    // -------------------------------------------------------------------------
+
+    //COMPROBACIÓN DE TEXTO MÍNIMO INTRODUCIDO EN EL EDITOR ORIGINAL
+    $scope.minTexto = function () {
+
+        var txt = CKEDITOR.instances.original.getData();
+        var caracteres = txt.length;
+
+        var min = true;
+
+        if (caracteres >= 17) {
+            min = true;
+        } else {
+            min = false;
+        }
+
+        return min;
+
+    };
+
+    // -------------------------------------------------------------------------
+
+    //ACTIVACIÓN DEL BOTÓN DE PROCESAMIENTO
+    $scope.habilitaProcesamiento = function () {
+
+        if ($scope.minTexto()) {
+            $('#procesar').removeClass('procesar-deshabilitado');
+        }
+
+    };
+
+    // -------------------------------------------------------------------------
+
+    //DESACTIVACIÓN DEL BOTÓN DE PROCESAMIENTO
+    $scope.deshabilitaProcesamiento = function () {
+
+        $('#procesar').addClass('procesar-deshabilitado');
+
+    };
+
+    // -------------------------------------------------------------------------
+
+    //ACTIVACIÓN DE LOS BOTONES DE GUARDAR, DESCARGAR Y COMPARTIR
+    $scope.habilitaDescargas = function () {
+
+        if ($scope.minTexto()) {
+            $('#guardar').removeClass('procesar-deshabilitado');
+            $('#descargar').removeClass('procesar-deshabilitado');
+            $('#compartir').removeClass('procesar-deshabilitado');
+            $('#imprimir').removeClass('procesar-deshabilitado');
+        }
+
+    };
+
+    // -------------------------------------------------------------------------
+
+    //DESACTIVACIÓN DE LOS BOTONES DE GUARDAR, DESCARGAR Y COMPARTIR
+    $scope.deshabilitaDescargas = function () {
+
+        $('#guardar').addClass('procesar-deshabilitado');
+        $('#descargar').addClass('procesar-deshabilitado');
+        $('#compartir').addClass('procesar-deshabilitado');
+        $('#imprimir').addClass('procesar-deshabilitado');
+
+    };
+
+    // -------------------------------------------------------------------------
+
+    //REALIZACIÓN DEL PROCESAMIENTO
+    $scope.procesar = function () {
+
+        if (!$('#procesar').hasClass('procesar-deshabilitado')) {
 
             $('#procesar').addClass('invisible');
             $('#loading').removeClass('invisible');
             $('#loading').removeClass('oculto');
 
-            
-            var txt = $('#original').froalaEditor('html.get');
-            var contenido = "";
-            var procesado = "";
+
+            var contenido = CKEDITOR.instances.original.getData();
+            var procesado = CKEDITOR.instances.original.getData();
+
+            var opcion1 = adaptaService.getOpcion1Procesamiento();
+            var ratio1 = adaptaService.getRatio1Procesamiento();
+            ratio1 = (100 - (ratio1 - 1));
+
+            var opcion2 = adaptaService.getOpcion2Procesamiento();
+
+            var opcion3 = adaptaService.getOpcion3Procesamiento();
+
 
             var palabras = "";
-            
-            //var metodo = adaptaService.getProcesamiento();
-            var url = "";
-            
+
+            var lenguaje = "";
+
             $.ajax({
                 type: "POST",
-                url: "http://gplsi.dlsi.ua.es:80/services/pln/rest/v1/gplsi/compendium/"+$scope.metodo+"/1",
+                url: "http://gplsi.dlsi.ua.es:80/services/pln/rest/v1/lang/detect",
                 async: false,
                 contentType: "text/plain",
-                data: txt,
-                success: function(data, status) {
-                    contenido = data;
+                data: contenido,
+                success: function (response, status) {
+                    lenguaje = response;
                 },
-                error: function(result) {
-                    alert("ERROR: "+ JSON.stringify(result))
+                error: function (response) {
+                    alert("Ha ocurrido un error: " + JSON.stringify(response))
                 }
             });
 
-            palabras = contenido.split(' ');
 
-            for(var i=0; i<palabras.length; i++) {
+            //LENGUAJE: INGLÉS
+            if (lenguaje == "en") {
 
-              procesado += "<span class='open'>"+palabras[i]+" </span>";
+                //OPCIÓN 1: RESUMEN
+                // --- 0 -> Desactivado
+                // --- 1 -> Activado
+
+                if (opcion1 == "1") {
+
+                    //RESUMEN Activado
+                    $.ajax({
+                        type: "POST",
+                        url: "http://gplsi.dlsi.ua.es:80/services/pln/rest/v1/gplsi/compendium/n/" + ratio1,
+                        async: false,
+                        contentType: "text/plain",
+                        data: contenido,
+                        success: function (response, status) {
+                            procesado = response;
+                            //CKEDITOR.instances.procesado.setData(response);
+                        },
+                        error: function (response) {
+                            alert("Ha ocurrido un error: " + JSON.stringify(response))
+                        }
+                    });
+
+                }
+
+                //OPCIÓN 2: VISUALIZACION
+                // --- 1 -> Textual
+                // --- 2 -> Visual
+                // --- 3 -> Nube
+                // --- 4 -> Esquema
+
+                if (opcion2 == "1") {
+                    //VISUALIZACION Textual
+                    //No es necesario realizar nada, puesto que la visualización por defecto es textual (obtenida del texto original)
+                } else if (opcion2 == "2") {
+                    //VISUALIZACION Visual
+                } else if (opcion2 == "3") {
+                    //VISUALIZACION Nube
+
+                    //var separadores = ['.',',',':',';','¿','?','¡','!','"','/','|','(',')','=','·',' ','  '];
+                    //var procesado_nube = procesado.split (new RegExp (separadores.join('|'),'g'));
+                    var procesado_nube = procesado.split(/[ .:;?!~,`"&|()<>{}\[\]\r\n/\\]+/);
+                    //alert(procesado_nube);
+
+                    var freqMap = {};
+                    procesado_nube.forEach(function (w) {
+                        if (!freqMap[w]) {
+                            freqMap[w] = 0;
+                        }
+                        freqMap[w] += 1;
+                    });
+
+
+                    //alert(JSON.stringify(freqMap));
+
+                    //alert(freqMap["at"]);
+
+
+
+
+
+
+
+
+                    var sortedWords = procesado_nube.sort();
+                    var uniqueWords = [];
+                    var d = {};
+                    var wordcount = 1;
+                    var result = [];
+                    var numofwords = sortedWords.length;
+
+                    for (var i = 0; i < sortedWords.length; i++) {
+
+                        var currentword = sortedWords[i];
+
+                        if (sortedWords[i + 1] === currentword) {
+                            wordcount++;
+                        }
+
+                        if (!d[currentword]) {
+                            d[currentword] = true;
+                            uniqueWords.push({
+                                word: currentword,
+                                count: wordcount
+                            });
+                        }
+                    }
+
+                    uniqueWords = uniqueWords.slice(0, numofwords).sort(function (a, b) {
+                        return b.count - a.count;
+                    });
+
+                    for (i = 0; i < uniqueWords.length; i++) {
+
+                        result.push(uniqueWords[i].word);
+                    }
+
+                    alert(result.toString());
+
+
+
+
+
+
+
+                } else if (opcion2 == "4") {
+                    //VISUALIZACION Esquema
+                }
+
+
+                //OPCIÓN 3: ...
+                if (opcion3 == "1") {
+
+                }
+
+                //Despues de realizar todo el procesamiento sobre el texto original, se escribe el texto procesado en su textarea
+                CKEDITOR.instances.procesado.setData(procesado);
+
             }
-            
+
+            //LENGUAJE: CUALQUIER OTRO
+            else {
+                CKEDITOR.instances.procesado.setData("El texto introducido está en un idioma que no es compatible con la aplicación. Actualmente, ADAPT@ solo puede procesar textos en inglés.");
+            }
+
+            /*
+            var prueba = "buenas tardes";
+            $http.post(
+
+                "http://gplsi.dlsi.ua.es:80/services/pln/rest/v1/lang/detect", {body:prueba}
+
+            ).then(function (response) {
+
+                alert("exito -> " + response);
+
+            }, function (response) {
+
+                alert("error -> " + response);
+                alert(JSON.stringify(response));
+            });
+
+            */
 
 
-            $('#procesado').froalaEditor('html.set', procesado);
-            $('#procesado').froalaEditor('undo.saveStep');
+            /*
+                        $http({
+                                url: 'http://gplsi.dlsi.ua.es:80/services/pln/rest/v1/lang/detect',
+                                method: "POST",
+                                data: '{"body": "hola buenos dias"}'
+                            })
+                            .then(function (response) {
+                                    alert("correcto: " + response);
+                                    alert(JSON.stringify(response));
+                                },
+                                function (response) {
+                                    alert("incorrecto: " + response);
+                                    alert(JSON.stringify(response));
+                                });
+            */
+
+
+
+            /*
+                        $http.post(
+
+                            "http://gplsi.dlsi.ua.es:80/services/pln/rest/v1/lang/detect", "buenas tardes"
+
+                        ).then(function (response) {
+
+                            alert("exito -> " + response);
+
+                        }, function (response) {
+
+                            alert("error -> " + response);
+                            alert(JSON.stringify(response));
+                        });
+                        */
+
+            /*
+                        $.ajax({
+                            type: "POST",
+                            url: "http://gplsi.dlsi.ua.es:80/services/pln/rest/v1/gplsi/compendium/" + $scope.metodo + "/1",
+                            async: false,
+                            contentType: "text/plain",
+                            data: txt,
+                            success: function (data, status) {
+                                contenido = data;
+                            },
+                            error: function (result) {
+                                alert("ERROR: " + JSON.stringify(result))
+                            }
+                        });
+
+                        palabras = contenido.split(' ');
+
+                        for (var i = 0; i < palabras.length; i++) {
+
+                            procesado += "<span class='open'>" + palabras[i] + " </span>";
+                        }
+            */
+
+            //CKEDITOR.instances.procesado.setData(procesado);
+
 
             $('#procesar').addClass('procesar-deshabilitado');
             $('#procesar').removeClass('invisible');
@@ -487,25 +401,68 @@ var adaptaCtrl = app.controller('adaptaCtrl',function ($scope, $compile, $state,
 
         }
 
+
+        $scope.deshabilitaProcesamiento();
+
     };
 
 
 
 
-    $scope.imagenPalabra = function(palabra) {
+
+    // -------------------------------------------------------------------------
+
+    // Imprimir documento
+    $('#imprimir').on('click', function () {
+
+        var texto_original = CKEDITOR.instances.original.document.getBody().getHtml();
+        var texto_procesado = CKEDITOR.instances.procesado.document.getBody().getHtml();
+
+        $("#documento_imprimir_original").html(texto_original);
+
+        var nombre_original = "original";
+        var nombre_procesado = "procesado";
+
+        //$.print("#documento_imprimir_original");
+
+        //$("#documento_imprimir_original").print();
+
+
+
+        var doc = window.open('', 'PRINT', 'height=400,width=600');
+
+        doc.document.write('<html><head><title>' + document.title + '</title>');
+        doc.document.write('</head><body >');
+        doc.document.write($("#documento_imprimir_original").html());
+        doc.document.write('</body></html>');
+
+        doc.document.close();
+        doc.focus();
+
+        doc.print();
+        doc.close();
+
+
+    });
+
+
+    // -------------------------------------------------------------------------
+
+
+    $scope.imagenPalabra = function (palabra) {
 
         $.ajax({
             type: "GET",
-            url: "https://babelnet.io/v4/getSynsetIds?word="+palabra+"&langs=ES&key=135619a2-dd54-4581-a93f-67f93ad66f1d",
+            url: "https://babelnet.io/v4/getSynsetIds?word=" + palabra + "&langs=ES&key=135619a2-dd54-4581-a93f-67f93ad66f1d",
             async: false,
             //data: {id:'bn:14792761n',key:'135619a2-dd54-4581-a93f-67f93ad66f1d'},
-            success: function(data, status) {
+            success: function (data, status) {
                 console.log(data[1].id);
                 id_palabra.setPalabraId(data[1].id);
             },
 
-            error: function(result) {
-                console.log("ERROR: "+result);
+            error: function (result) {
+                console.log("ERROR: " + result);
             }
         });
 
@@ -513,31 +470,31 @@ var adaptaCtrl = app.controller('adaptaCtrl',function ($scope, $compile, $state,
 
         $.ajax({
             type: "GET",
-            url: "https://babelnet.io/v4/getSynset?id="+id_palabra_aux+"&key=135619a2-dd54-4581-a93f-67f93ad66f1d",
+            url: "https://babelnet.io/v4/getSynset?id=" + id_palabra_aux + "&key=135619a2-dd54-4581-a93f-67f93ad66f1d",
             //data: {id:'bn:14792761n',key:'135619a2-dd54-4581-a93f-67f93ad66f1d'},
-            success: function(data, status) {
+            success: function (data, status) {
                 //console.log("FUNCIONA: "+data.lemma+", .... ,"+data.pos);
                 //console.log(JSON.stringify(data));
 
-                $.each(data['images'], function(key, val) {
+                $.each(data['images'], function (key, val) {
 
                     var key = key;
 
 
 
                     //var entry = "Language: " + val['language'] + "<br/>Name: "
-                        //+ val['name'] + "<br/>Url: " + val['url'] + "<br/><br/>";
+                    //+ val['name'] + "<br/>Url: " + val['url'] + "<br/><br/>";
 
                     //$('<div>', {html:entry}).appendTo(document.body);
                     //var preimagen = "<img ng-src='"+val['url']+"'>";
                     //var imagen = $compile(preimagen);
-                    $scope.procesado += "<img ng-src='"+val['url']+"'>";
+                    $scope.procesado += "<img ng-src='" + val['url'] + "'>";
                     //$compile($scope.procesado);
                     //$scope.$apply();
                 });
 
-                
-                $.each(data['glosses'], function(key, val) {
+
+                $.each(data['glosses'], function (key, val) {
                     $scope.procesado += " ---- Gloss: " + val['gloss'];
                     //$scope.$apply();
                 });
@@ -550,58 +507,15 @@ var adaptaCtrl = app.controller('adaptaCtrl',function ($scope, $compile, $state,
                     $scope.$apply();
                 });
                 */
-                
+
             },
 
-            error: function(result) {
-                console.log("ERROR: "+result);
+            error: function (result) {
+                console.log("ERROR: " + result);
             }
         });
 
     };
 
 
-    var id_palabra = (function(){
-
-        var palabra_id = "";
-
-        return {
-            getPalabraId: function(){
-                return palabra_id;
-            },
-            setPalabraId: function(idp){
-                palabra_id = idp;
-            }
-        }
-        
-    }());
-
 });
-
-
-
-
-
-
-$(document).on('click', '.icono-descarga', function() {
-
-  if($(this).hasClass('icono-descarga-activo')) {
-
-    $(this).removeClass('icono-descarga-activo');
-  }
-
-  else {
-
-    $(this).addClass('icono-descarga-activo');
-  }
-
-});
-
-
-$(document).on('click', '.icono-redsocial', function() {
-
-  	window.open(this.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0');
-	event.preventDefault();
-
-});
-

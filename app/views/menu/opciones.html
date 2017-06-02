@@ -2,20 +2,22 @@
 
 
 <div class="titulo-menu">
-    <a href="#">OPCIONES</a>
+  <a href="#">OPCIONES</a>
 </div>
 
 <div id="contenedor-menu-opciones" class="item-acordeon">
-    <div id="contenido-menu-opciones" class="contenido-menu">
-        <i id="chincheta-opciones" class="glyphicon glyphicon-pushpin chincheta"></i>
-            		
-        <div class="panel-menu">
+  <div id="contenido-menu-opciones" class="contenido-menu">
+    <i id="chincheta-opciones" class="glyphicon glyphicon-pushpin chincheta"></i>
 
-            <h4>Resumen</h4>
+    <div class="panel-menu" ng-controller="opcionesCtrl">
 
-            <span ng-bind="pupu">a</span>
+      <h4>Opciones</h4>
 
-            <div id="radios"> 
+      <!-- <span ng-bind="pupu">a</span> -->
+
+      <!--
+
+            <div id="radios">
 
                 <label for="metodoL" class="metodo" data-toggle="tooltip" title="Base line, extracting the n first sentences of the document." data-placement="bottom">
                 </label>
@@ -40,33 +42,96 @@
                 <label for="metodoR" class="metodo" data-toggle="tooltip" title="Relevance detection (code quantity principle)" data-placement="bottom">
                 </label>
                 <input type="radio" id="metodoR" name="metodo" ng-model="$parent.metodo" ng-value="'r'" ng-change="habilitaProcesamiento()" />
-                
+
                 <span id="slider"></span>
-            </div>
-
-    
-            <div class="slider">
-                <input type="range">
-            </div>
-
-            <div class="slider">
-                <input type="range">
-            </div>
-
-            <div class="slider">
-                <input type="range">
-            </div>
-            <!--
-            <div class='toggle' id='switch'>
-                <div class='toggle-text-off'>OFF</div>
-                <div class='glow-comp'></div>
-                <div class='toggle-button'></div>
-                <div class='toggle-text-on'>ON</div>
             </div>
 
             -->
 
+
+      <!-- Opción 1 -->
+      <div id="opcion1" class="opcion">
+        <div class="switch">
+          <input type="checkbox" name="toggle" id="check_opcion1" checked>
+          <label for="toggle"><i></i></label>
+          <span></span>
         </div>
+        <div class="slider">
+          <input type="range" id="range_opcion1" name="range_opcion1" min="1" max="100">
+        </div>
+      </div>
+
+
+      <!-- Opción 2 -->
+      <div class="contenedor-visualizacion">
+        <div class="radio-tile-group">
+
+          <div class="input-container">
+            <input id="visualizacion_textual" class="radio-button radio_opcion2" type="radio" name="radio_visualizacion" value="textual" checked />
+            <div class="radio-tile">
+              <i class="fa fa-font fa-5x" aria-hidden="true"></i>
+              <span class="radio-tile-label">Textual</span>
+            </div>
+          </div>
+
+          <div class="input-container">
+            <input id="visualizacion_visual" class="radio-button radio_opcion2" type="radio" name="radio_visualizacion" value="visual" />
+            <div class="radio-tile">
+              <i class="fa fa-picture-o fa-5x" aria-hidden="true"></i>
+              <span class="radio-tile-label">Visual</span>
+            </div>
+          </div>
+
+          <div class="input-container">
+            <input id="visualizacion_nube" class="radio-button radio_opcion2" type="radio" name="radio_visualizacion" value="nube" />
+            <div class="radio-tile">
+              <i class="fa fa-cloud fa-5x" aria-hidden="true"></i>
+              <span class="radio-tile-label">Nube</span>
+            </div>
+          </div>
+
+          <div class="input-container">
+            <input id="visualizacion_esquema" class="radio-button radio_opcion2" type="radio" name="radio_visualizacion" value="esquema" />
+            <div class="radio-tile">
+              <i class="fa fa-sitemap fa-5x" aria-hidden="true"></i>
+              <span class="radio-tile-label">Esquema</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+      <!--
+            <div id="opcion2" class="opcion">
+                <div class="switch">
+                    <input type="checkbox" name="toggle" id="check_opcion2">
+                    <label for="toggle"><i></i></label>
+                    <span></span>
+                </div>
+                <div class="slider">
+                    <input type="range" id="range_opcion2" name="range_opcion2" min="1" max="100" disabled>
+                </div>
+            </div>
+-->
+
+
+      <!-- Opción 3 -->
+      <div id="opcion3" class="opcion">
+        <div class="switch">
+          <input type="checkbox" name="toggle" id="check_opcion3">
+          <label for="toggle"><i></i></label>
+          <span></span>
+        </div>
+        <div class="slider">
+          <input type="range" id="range_opcion3" name="range_opcion3" min="1" max="100" disabled>
+        </div>
+      </div>
+
+
 
     </div>
+
+  </div>
 </div>
